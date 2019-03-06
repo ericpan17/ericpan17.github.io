@@ -10,9 +10,9 @@
 
     <title>Markham Home Real Estate Agency</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <link href="css/style.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/mdb.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
 </head>
 
 <body style="background-color: #81C3Fe">
@@ -38,13 +38,14 @@
 
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link waves-effect" href="#">Home
-                                <span class="sr-only">(current)</span>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="/">Home
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect" href="/contact">Contact Us</a>
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect" href="/contact">Contact Us
+                                <span class="sr-only">(current)</span>
+			    </a>
                         </li>
                     </ul>
 
@@ -84,28 +85,27 @@
                 <div class="card-body text-white text-left px-5">
 
                     <h1 class="mb-4" style="color: #4e60c4">
-                        <strong>Rhonda Tang</strong>
+                        <strong>Contact Form</strong>
                     </h1>
-                    <p style="color: #4e60c4">
-                        <strong>Sales Representative</strong>
-                        
-                    </p>
-                    <p style="color: #4e60c4">
-                        Cell: <strong>647-883-0528</strong>
-                    </p>
-                    <p style="color: #4e60c4">
-			WeChat: rhondatangca<br>
-                        Email: rhondatang@gmail.com<br>
-                        Website: https://markhamhome.ca
-                    </p>
-
-                    <p class="mb-4">
-                        <br><br>
-                        <img src="img/wanthome.png" style="width: 100%">
-                    </p>
+  <form>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input class="form-control" id="phone" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input class="form-control" id="email" required>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="submitEmail()">Submit</button>
+  </form>
                 </div>
-                <!-- Content -->
+
             </section>
+                <!-- Content -->
             </div>
             <!--Card-->
             <div class="col-md-6 mb-4">
@@ -113,7 +113,7 @@
 
                 <!--Card image-->
                 <div class="view overlay">
-                    <img src="img/rhondatang2.jpg" class="card-img-top" style="width: 100%" alt="">
+                    <img src="/img/rhondatang2.jpg" class="card-img-top" style="width: 100%" alt="">
                     <a href="/">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -132,6 +132,25 @@
             <!--/.Card-->
             <!--Section: Jumbotron-->
             </div>
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">You have received your email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	<p>We will contact you in 24 hours</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             <hr class="my-5">
 
         </div>
@@ -166,7 +185,7 @@
 
         <!--Copyright-->
         <div class="footer-copyright py-3">
-            © 2018 Copyright:
+            © 2019 Copyright:
             <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> Template by MDBootstrap.com </a>
         </div>
         <!--/.Copyright-->
@@ -176,17 +195,45 @@
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
+    </script>
+    <script>
+function submitEmail() {
+let url = 'https://api.erglobal.ca/data'
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let email=document.getElementById("email").value
+document.getElementById("name").value = ''
+document.getElementById("phone").value = ''
+document.getElementById("email").value = ''
+
+console.log(email);
+let data = {name,phone,email}
+fetch(url, {
+  method: 'POST', // or 'PUT'
+  mode: "cors", // no-cors, cors, *same-origin
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  body: JSON.stringify(data),
+  headers:{
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+}).then(res => res.json())
+.then(response => ( $('#confirmModal').modal({show: true})))
+.catch(e => {
+    console.log(e);
+  });
+}
     </script>
 </body>
 
